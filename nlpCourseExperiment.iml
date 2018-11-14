@@ -11,7 +11,50 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
-    <orderEntry type="library" name="Maven: org.ansj:ansj_seg:5.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.nlpcn:nlp-lang:1.7" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: org.ansj:ans_seg-20130615.jar:unknown">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/ans_seg-20130615.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.ansj:ansj_lucene_3x_plug.jar:unknown">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/ansj_lucene_3x_plug.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.analysis:IKAnalyzer2012FF_u1.jar:unknown">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/IKAnalyzer2012FF_u1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.je:je-analysis-1.5.3.jar:unknown">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/je-analysis-1.5.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.lucene:lucene-core-3.0.0.jar:unknown">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/lucene-core-3.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

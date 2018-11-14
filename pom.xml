@@ -21,15 +21,45 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+      <!--<dependency>-->
+          <!--<groupId>org.ansj</groupId>-->
+          <!--<artifactId>ansj_seg</artifactId>-->
+          <!--<version>5.1.1</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+          <!--<groupId>org.nlpcn</groupId>-->
+          <!--<artifactId>nlp-lang</artifactId>-->
+          <!--<version>1.7</version>-->
+      <!--</dependency>-->
       <dependency>
           <groupId>org.ansj</groupId>
-          <artifactId>ansj_seg</artifactId>
-          <version>5.1.1</version>
+          <artifactId>ans_seg-20130615.jar</artifactId>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/ans_seg-20130615.jar</systemPath>
       </dependency>
       <dependency>
-          <groupId>org.nlpcn</groupId>
-          <artifactId>nlp-lang</artifactId>
-          <version>1.7</version>
+          <groupId>org.ansj</groupId>
+          <artifactId>ansj_lucene_3x_plug.jar</artifactId>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/ansj_lucene_3x_plug.jar</systemPath>
+      </dependency>
+      <dependency>
+          <groupId>org.analysis</groupId>
+          <artifactId>IKAnalyzer2012FF_u1.jar</artifactId>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/IKAnalyzer2012FF_u1.jar</systemPath>
+      </dependency>
+      <dependency>
+          <groupId>org.je</groupId>
+          <artifactId>je-analysis-1.5.3.jar</artifactId>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/je-analysis-1.5.3.jar</systemPath>
+      </dependency>
+      <dependency>
+          <groupId>org.lucene</groupId>
+          <artifactId>lucene-core-3.0.0.jar</artifactId>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/lucene-core-3.0.0.jar</systemPath>
       </dependency>
   </dependencies>
 </project>
