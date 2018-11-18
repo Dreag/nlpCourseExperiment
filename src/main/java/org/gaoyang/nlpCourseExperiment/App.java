@@ -1,10 +1,7 @@
 package org.gaoyang.nlpCourseExperiment;
 
-import javafx.scene.text.FontWeight;
 import org.ansj.domain.Term;
 
-import javax.xml.soap.Text;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +11,9 @@ import java.util.Set;
 public class App {
 
     public static void main(String[] args) throws Exception{
+        /*
+        FMM、RMM、Ansj三种分词方式，比较其运行时间
+         */
         String Text = "中国人民解放军信息工程大学以原信息工程大学、外国语学院为基础重建，隶属战略支援部队";
 
         // 获取词典

@@ -7,11 +7,11 @@ import java.util.Set;
 
 public class ReverseDirectionalMaximumMatching {
 
-    public List<String> ReverseMatching(String sentence, Set<String> dictionary, Integer MaxWordLength) {
+    public List<String> ReverseMatching(String Text, Set<String> dictionary, Integer MaxWordLength) {
 
+        // 使用
         long starttime = System.nanoTime();
         List<String> results = new ArrayList<String>();
-        String Text = sentence;
         String subsequence;
 
         while (Text.length() > 0) {

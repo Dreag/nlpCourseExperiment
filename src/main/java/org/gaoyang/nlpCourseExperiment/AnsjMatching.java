@@ -18,9 +18,6 @@ public class AnsjMatching {
         List<Term> terms = ToAnalysis.paser(Text, userForest);
         new NatureRecognition(terms).recognition();
 
-//        filterStopWord("data/stopword.dic");
-//        terms = FilterModifWord.modifResult(terms);
-
         return terms;
     }
 
