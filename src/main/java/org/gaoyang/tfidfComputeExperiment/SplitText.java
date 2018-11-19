@@ -3,11 +3,12 @@ package org.gaoyang.tfidfComputeExperiment;
 import org.ansj.domain.Term;
 import org.gaoyang.nlpCourseExperiment.AnsjMatching;
 
-import java.io.*;
-import java.nio.charset.Charset;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class SplitText {
 
@@ -41,9 +42,6 @@ public class SplitText {
 
         // result 中存放所有语料库中分词、提取字符串后的结果
         List<List<String>> result = new ArrayList<List<String>>();
-
-
-
 
         // 获取所有的语料库文件
         SplitText splitText = new SplitText();
