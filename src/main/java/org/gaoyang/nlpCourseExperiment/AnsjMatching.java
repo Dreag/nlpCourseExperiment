@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AnsjMatching {
 
-    public List<Term> UseAnsjTool(String Text) throws Exception {
+    public static List<Term> UseAnsjTool(String Text) throws Exception {
 
         Forest userForest = UserDefineLibrary.makeUserDefineForest(false,"data/userDefinedDict.dic");
 
