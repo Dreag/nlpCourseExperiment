@@ -1,23 +1,25 @@
 package org.gaoyang.tfidfComputeExperiment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ValueCompute {
 
-    public static List<Map> ComputeTfValue(List<List<String>> splitResult) throws Exception {
+
+    private static List<Map> ComputeTfValue(List<List<String>> splitResult) {
 
         List<Map> tfValue = new ArrayList<>();
         // 计算tf值
-        for (int i = 0; i < splitResult.size(); i++) {
+        for (List<String> corpusText : splitResult) {
             // 语料库中的每一个语料为一个corpusText。词语的最大长度为 MaxWordLength
-            List<String> corpusText = splitResult.get(i);
-            Map<String, Float> newOneTfValue = new HashMap<>();
+            Map<String, Float> newOneTfValue = new TreeMap<>();
             // 获取本条语料总词数
-            Integer WordSum = corpusText.size();
+            int WordSum = corpusText.size();
 
             Map<String, Long> OneTfValue = corpusText.stream().collect(Collectors.groupingBy(p -> p, Collectors.counting()));
             // 打印map中的单词计数
@@ -31,23 +33,21 @@ public class ValueCompute {
         return tfValue;
     }
 
-    public static List<Map> ComputeIdfValue(List<List<String>> splitResult) {
+    private static List<Map> ComputeIdfValue(List<List<String>> splitResult) {
 
         // 存放idf计算的值
         List<Map> idfValue = new ArrayList<>();
-        Integer CorpusSum = splitResult.size();
+        int CorpusSum = splitResult.size();
 
-        for (int i = 0; i < splitResult.size(); i++) {
-            Map<String, Float> idfMap = new HashMap<>();
-            // corpus为语料库中的每一个语料
-            List<String> corpusText = splitResult.get(i);
+        for (List<String> aSplitResult : splitResult) {
+            Map<String, Float> idfMap = new TreeMap<>();
+
             // 遍历语料中的每个词，统计每个词在语料库中出现的个数，并写入Map中
-            for (int j = 0; j < corpusText.size(); j++) {
-                String everyWord = corpusText.get(j);
+            for (String everyWord : aSplitResult) {
 
-                Integer ExistCorpusSum = 0;
-                for (Integer k = 0; k < CorpusSum; k++) {
-                    if (splitResult.get(k).contains(everyWord)) {
+                int ExistCorpusSum = 0;
+                for (List<String> aSplitResult1 : splitResult) {
+                    if (aSplitResult1.contains(everyWord)) {
                         ExistCorpusSum++;
                     }
                 }
@@ -59,15 +59,17 @@ public class ValueCompute {
         return idfValue;
     }
 
-    public static List<Map> ComputeTfIdf(List<Map> tfValue, List<Map> idfValue) throws Exception{
+    private static List<Map> ComputeTfIdf(List<Map> tfValue, List<Map> idfValue) throws Exception {
         List<Map> TfIdfList = new ArrayList<>();
+        // 计算ifidf值
         for (int i = 0; i < tfValue.size(); i++) {
-            Map<String, Float> IfIdfValue = new HashMap<>();
+            Map<String, Double> IfIdfValue = new HashMap<>();
 
-            Map<String,Float> tfcorpus = tfValue.get(i);
-            Map<String,Float> idfcorpus = idfValue.get(i);
-            for (String key: tfcorpus.keySet()){
-                IfIdfValue.put(key,tfcorpus.get(key)*idfcorpus.get(key)*100);
+            @SuppressWarnings("unchecked")
+            Map<String, Float> tfcorpus = tfValue.get(i);
+            Map<String, Float> idfcorpus = idfValue.get(i);
+            for (String key : tfcorpus.keySet()) {
+                IfIdfValue.put(key, (double) (tfcorpus.get(key) * idfcorpus.get(key)));
             }
 
             TfIdfList.add(IfIdfValue);
@@ -75,13 +77,31 @@ public class ValueCompute {
         return TfIdfList;
     }
 
-    public void app(List<List<String>> splitResult) throws Exception{
-        ValueCompute valueCompute = new ValueCompute();
+    public void app(List<List<String>> splitResult) throws Exception {
+
         List<Map> tfValue = ValueCompute.ComputeTfValue(splitResult);
         List<Map> idfValue = ValueCompute.ComputeIdfValue(splitResult);
-        List<Map> TfidfValue = ValueCompute.ComputeTfIdf(tfValue,idfValue);
-        for (int i=0;i<TfidfValue.size();i++){
-            System.out.println(TfidfValue.get(i));
+        List<Map> TfidfValue = ValueCompute.ComputeTfIdf(tfValue, idfValue);
+
+        File OutputFile = new File("data/tfIdfValue.txt");
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(OutputFile), StandardCharsets.UTF_8));
+
+        for (int i = 0; i < TfidfValue.size(); i++) {
+
+            List<Map.Entry<String, Double>> entryArrayList = new ArrayList<>(TfidfValue.get(i).entrySet());
+
+            // 定义treeMap按照value的降序排序
+            entryArrayList.sort(Comparator.comparing(Map.Entry::getValue, (o1, o2) -> o2.compareTo(o1)));
+            // 将计算的结果写入到文件中
+            bufferedWriter.write(entryArrayList.toString() + "\n");
+
+            System.out.println("----------------------CORPUS NUM: " + i + "------------------------------");
+            for (Map.Entry entry : entryArrayList.subList(0, 5)) {
+                System.out.println(entry.getKey() + " - " + entry.getValue());
+            }
+
         }
+        bufferedWriter.flush();
+        bufferedWriter.close();
     }
 }

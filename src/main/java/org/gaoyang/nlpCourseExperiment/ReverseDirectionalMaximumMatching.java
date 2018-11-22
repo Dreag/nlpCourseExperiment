@@ -11,14 +11,14 @@ public class ReverseDirectionalMaximumMatching {
 
         // 使用
         long starttime = System.nanoTime();
-        List<String> results = new ArrayList<String>();
+        List<String> results = new ArrayList<>();
         String subsequence;
 
         while (Text.length() > 0) {
             if (Text.length() < MaxWordLength) {
                 subsequence = Text;
             } else {
-                subsequence = Text.substring(Text.length() - MaxWordLength, Text.length());
+                subsequence = Text.substring(Text.length() - MaxWordLength);
             }
 
             while (subsequence.length() > 0) {
